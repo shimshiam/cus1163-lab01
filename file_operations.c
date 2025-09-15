@@ -10,12 +10,12 @@ int create_and_write_file(const char *filename, const char *content) {
     ssize_t bytes_written;
 
     printf("Creating file: %s\n", filename);
-    printf("Content to write: \"%s\%n", content);
+    printf("Content to write: %s\n", content);
 
     fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
     
     if (fd == -1){
-    perror("Error: Cannot open file");
+    perror("Error: Cannot open file\n");
     return -1;
     }
 
@@ -23,20 +23,20 @@ int create_and_write_file(const char *filename, const char *content) {
 
     bytes_written = write(fd, content, strlen(content));
     if (bytes_written == -1) {
-        perror("Error: failed to write");
+        perror("Error: Failed to write file\n");
         close(fd);
         return -1;
     }
 
     printf("Successfully wrote %zd bytes to %s.\n", bytes_written, filename);
 
-    close(fd);
+    
     if (close(fd) == -1) {
-        perror("Error: Cannot close file");
+        perror("Error: Cannot close file\n");
         return -1;
     }
 
-    printf("File has been closed.");
+    printf("File closed successfully.\n");
     return 0;
 }
 
@@ -46,11 +46,11 @@ int read_file_contents(const char *filename) {
     char buffer[1024];
     ssize_t bytes_read;
 
-    printf("Reading: %s\n", filename)
+    printf("Reading: %s\n", filename);
 
     fd = open(filename, O_RDONLY);
     if (fd == -1) {
-        perror("Error: File cannot be opened");
+        perror("Error: File cannot be opened\n");
         return -1;
     }
 
@@ -66,14 +66,15 @@ int read_file_contents(const char *filename) {
         perror("Error: Cannot read file");
         close(fd);
         return -1;
+    }
 
     printf("\n|END FILE CONTENTS|\n");
-
-    close(fd);
+  
+    
     if (close(fd) == -1) {
         perror("Error closing file");
         return -1;
     }
 
-    printf("File closed successfully.");
+    printf("File closed successfully.\n");
 }
