@@ -63,7 +63,7 @@ int read_file_contents(const char *filename) {
       }
 
     if (bytes_read == -1) {
-        perror("Error: Cannot read file");
+        perror("Error: Cannot read file\n");
         close(fd);
         return -1;
     }
@@ -72,7 +72,7 @@ int read_file_contents(const char *filename) {
   
     
     if (close(fd) == -1) {
-        perror("Error closing file");
+        perror("Error closing file\n");
         return -1;
     }
 
